@@ -5,13 +5,27 @@ var movement_speed := 0.0
 var run_speed := 100
 var walk_speed := 60
 var acceleration := 6
+var jump_magnitude := 15.0
 var vertical_velocity := 0.0
-var gravity := 20.0
+var gravity := 28.0
 var angular_acceleration := 7
 
 var direction := Vector3.FORWARD
 var strafe_dir := Vector3.ZERO
 var strafe := Vector3.ZERO
+
+var sprint_toggle := true
+var sprinting := false
+
+func _input(event):
+	if sprint_toggle:
+		if event.is_action_pressed("sprint"):
+			sprinting = false if sprinting else true
+	else:
+		sprinting = Input.is_action_pressed("sprint")
+	
+	if Input.is_key_pressed(KEY_1):
+		sprint_toggle = false if sprint_toggle else true
 
 
 func _physics_process(delta):
@@ -32,7 +46,7 @@ func _physics_process(delta):
 		direction = direction.rotated(Vector3.UP, h_rot).normalized()
 		
 		
-		if Input.is_action_pressed("sprint") && $AnimationTree.get("parameters/aim_transition/current_state") == "not_aiming":
+		if sprinting && $AnimationTree.get("parameters/aim_transition/current_state") == "not_aiming":
 			movement_speed = run_speed
 			$AnimationTree["parameters/iwr_blend/blend_amount"] = lerp($AnimationTree.get("parameters/iwr_blend/blend_amount"), 1.0, delta * acceleration)
 		else:
@@ -48,11 +62,11 @@ func _physics_process(delta):
 
 	
 	velocity = lerp(velocity, direction * movement_speed, delta * acceleration)
-	velocity = velocity + Vector3.DOWN * vertical_velocity
+	velocity = velocity + Vector3.UP * vertical_velocity
 	move_and_slide()
 	
 	if !is_on_floor():
-		vertical_velocity += gravity * delta
+		vertical_velocity -= gravity * delta
 	else:
 		vertical_velocity = 0
 	
@@ -68,7 +82,14 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("fire"):
 		$AnimationTree["parameters/throw/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
-		print("firing")
+	
+	if is_on_floor():
+		$AnimationTree["parameters/jump_transition/transition_request"] = "not_jumping"
+		if Input.is_action_just_pressed("jump"):
+			vertical_velocity = jump_magnitude
+			$AnimationTree["parameters/jump_transition/transition_request"] = "jumping"
+			$AnimationTree["parameters/JumpStateMachine/playback"].travel("Jump_Start")
+			
 	## Add the gravity.
 	#if not is_on_floor():
 		#velocity.y -= gravity * delta
