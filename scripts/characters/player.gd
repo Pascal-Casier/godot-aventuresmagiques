@@ -14,6 +14,9 @@ var direction := Vector3.FORWARD
 var strafe_dir := Vector3.ZERO
 var strafe := Vector3.ZERO
 
+var jumping := false
+var last_floor := true
+
 var sprint_toggle := true
 var sprinting := false
 
@@ -86,10 +89,17 @@ func _physics_process(delta):
 	if is_on_floor():
 		$AnimationTree["parameters/jump_transition/transition_request"] = "not_jumping"
 		if Input.is_action_just_pressed("jump"):
+			jumping = true
 			vertical_velocity = jump_magnitude
 			$AnimationTree["parameters/jump_transition/transition_request"] = "jumping"
 			$AnimationTree["parameters/JumpStateMachine/playback"].travel("Jump_Start")
-			
+	if is_on_floor() and not last_floor:
+		jumping = false
+		$AnimationTree["parameters/jump_transition/transition_request"] = "not_jumping"
+	if not is_on_floor() and not jumping:
+		$AnimationTree["parameters/JumpStateMachine/playback"].travel("Jump_Idle")
+		$AnimationTree["parameters/jump_transition/transition_request"] = "jumping"
+	last_floor = is_on_floor()
 	## Add the gravity.
 	#if not is_on_floor():
 		#velocity.y -= gravity * delta
