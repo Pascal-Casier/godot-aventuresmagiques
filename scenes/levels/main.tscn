@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c76jbis073lkc"]
+[gd_scene load_steps=9 format=3 uid="uid://c76jbis073lkc"]
 
 [ext_resource type="MeshLibrary" uid="uid://rdhq5wj52y0b" path="res://meshlibs/floorsMeshlib.tres" id="1_on268"]
 [ext_resource type="PackedScene" uid="uid://ctk8p4yd8qcek" path="res://scenes/characters/player.tscn" id="2_8yq1o"]
 [ext_resource type="PackedScene" uid="uid://1n4p4clqluci" path="res://scenes/Decoration/water_plane.tscn" id="3_8yp8c"]
 [ext_resource type="MeshLibrary" uid="uid://c2kpxx52kae10" path="res://meshlibs/Walls_stairsMeshlib.tres" id="4_1mcpy"]
+[ext_resource type="MeshLibrary" uid="uid://5o4cu0yxnitt" path="res://meshlibs/TilesGrassAndDirtMeshlib.tres" id="5_bwxts"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rtknh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -44,6 +45,15 @@ transform = Transform3D(46.9424, 0, 0, 0, 17.54, 0, 0, 0, 36.9264, 0, -2.03783, 
 [node name="GridMap2" type="GridMap" parent="."]
 mesh_library = ExtResource("4_1mcpy")
 data = {
-"cells": PackedInt32Array(-2, 3, 12, -4, 3, 655398, -6, 3, 655376, -65533, 2, 1441798, -4, 1, 1441816, -65532, 65530, 655362, -65532, 65531, 1048579, -4, 65533, 1048576, -65534, 65532, 1, -65536, 3, 4, -1, 65535, 655371, -5, 0, 655369, -5, 65531, 655367, -3, 65531, 655368)
+"cells": PackedInt32Array(-2, 3, 12, -4, 3, 655398, -6, 3, 655376, -65533, 2, 1441798, -4, 1, 1441816, -4, 65533, 1048576, -65534, 65532, 1, -65536, 3, 4, -1, 65535, 655371, -5, 0, 655369, -5, 65531, 655367, -3, 65531, 655368, -131068, 6, 3, -131071, 6, 655363, -65538, 6, 3, -65541, 6, 655363, -65542, 6, 655362, -65544, 5, 1441795, -65544, 2, 1048579, -65544, 65535, 1441795, -65544, 65532, 1048579, -65544, 65529, 1441795, -65542, 65528, 655363, -65539, 65528, 3, -131072, 65528, 655363, -131069, 65528, 3, -131067, 65529, 1048578, -131067, 65530, 1048579, -131067, 65533, 1441795, -131067, 65535, 1048579, -131067, 4, 1048579)
+}
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="GridMap3" type="GridMap" parent="."]
+mesh_library = ExtResource("5_bwxts")
+cell_center_x = false
+cell_center_z = false
+data = {
+"cells": PackedInt32Array(-65530, 3, 2, -65530, 2, 2, -65529, 3, 0, -65529, 1, 0, -65529, 2, 0, -131065, 1, 4, -131065, 2, 4, -131065, 3, 4, -131066, 3, 4, -131066, 2, 4, -65529, 0, 0, -65528, 0, 0, -65528, 1, 0)
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
