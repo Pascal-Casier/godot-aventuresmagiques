@@ -19,6 +19,20 @@ config/icon="res://icon.svg"
 
 Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
 
+[dialogic]
+
+layout/styles={
+"Default": {},
+"style1": {
+"export_overrides": {
+"text_alignment": "1",
+"text_size": "19.0"
+},
+"inherits": ""
+}
+}
+layout/default_style="Default"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
