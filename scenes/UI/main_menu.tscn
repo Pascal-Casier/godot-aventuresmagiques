@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://df6gjtuu0mgxo"]
+[gd_scene load_steps=7 format=3 uid="uid://df6gjtuu0mgxo"]
 
 [ext_resource type="Texture2D" uid="uid://cl280tbktvpx2" path="res://assets/images/menu_bgd1.png" id="1_d4yr8"]
 [ext_resource type="Script" path="res://scripts/UI/main_menu.gd" id="1_uha6w"]
 [ext_resource type="PackedScene" uid="uid://c4pbg52jv6f70" path="res://scenes/UI/options_menu.tscn" id="3_3blon"]
+[ext_resource type="AudioStream" uid="uid://b8hni40k1wwsg" path="res://assets/sounds/musics/hero_music_menu.mp3" id="4_jpvyj"]
 
 [sub_resource type="SystemFont" id="SystemFont_nfy46"]
 font_names = PackedStringArray("Impact")
@@ -101,3 +102,9 @@ text = "Exit
 [node name="Options_Menu" parent="." instance=ExtResource("3_3blon")]
 visible = false
 layout_mode = 1
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jpvyj")
+volume_db = -23.247
+autoplay = true
+bus = &"Music"

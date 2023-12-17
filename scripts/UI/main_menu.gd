@@ -6,6 +6,7 @@ class_name MainMenu
 @onready var exit_button = $MarginContainer/HBoxContainer/VBoxContainer/Exit_Button as Button
 @onready var options_menu = $Options_Menu as OptionsMenu
 @onready var margin_container = $MarginContainer as MarginContainer
+@onready var music_stream_player = $MusicStreamPlayer
 
 @onready var start_level = preload("res://scenes/levels/main.tscn") as PackedScene
 
