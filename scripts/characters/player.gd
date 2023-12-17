@@ -27,7 +27,7 @@ func _input(event):
 	else:
 		sprinting = Input.is_action_pressed("sprint")
 	
-	if Input.is_key_pressed(KEY_1):
+	if Input.is_action_just_pressed("toggle_sprint"):
 		sprint_toggle = false if sprint_toggle else true
 
 
