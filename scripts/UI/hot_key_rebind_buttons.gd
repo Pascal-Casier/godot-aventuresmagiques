@@ -51,6 +51,7 @@ func set_text_for_key() -> void:
 		var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
 		button.text = "%s" % action_keycode
 	elif action_event is InputEventMouseButton:
+		@warning_ignore("unused_variable")
 		var action_keycode = OS.get_keycode_string(action_event.button_index)
 		button.text = "%s" % "Mouse Button " + str(action_event.button_index)
 

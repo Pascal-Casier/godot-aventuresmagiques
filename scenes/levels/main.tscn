@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://c76jbis073lkc"]
+[gd_scene load_steps=11 format=3 uid="uid://c76jbis073lkc"]
 
 [ext_resource type="MeshLibrary" uid="uid://rdhq5wj52y0b" path="res://meshlibs/floorsMeshlib.tres" id="1_on268"]
 [ext_resource type="PackedScene" uid="uid://ctk8p4yd8qcek" path="res://scenes/characters/player.tscn" id="2_8yq1o"]
 [ext_resource type="PackedScene" uid="uid://1n4p4clqluci" path="res://scenes/Decoration/water_plane.tscn" id="3_8yp8c"]
 [ext_resource type="MeshLibrary" uid="uid://c2kpxx52kae10" path="res://meshlibs/Walls_stairsMeshlib.tres" id="4_1mcpy"]
 [ext_resource type="MeshLibrary" uid="uid://5o4cu0yxnitt" path="res://meshlibs/TilesGrassAndDirtMeshlib.tres" id="5_bwxts"]
+[ext_resource type="PackedScene" uid="uid://d2u0uvf4kn6ug" path="res://scenes/mechanics/lift.tscn" id="6_ft0g4"]
+[ext_resource type="PackedScene" uid="uid://ct42c476pl1wp" path="res://scenes/mechanics/chest.tscn" id="7_12jy0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rtknh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -37,7 +39,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Player" parent="." instance=ExtResource("2_8yq1o")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_8yq1o")]
 
 [node name="WaterPlane" parent="." instance=ExtResource("3_8yp8c")]
 transform = Transform3D(46.9424, 0, 0, 0, 17.54, 0, 0, 0, 36.9264, 0, -2.03783, 0)
@@ -57,3 +59,21 @@ data = {
 "cells": PackedInt32Array(-65530, 3, 2, -65530, 2, 2, -65529, 3, 0, -65529, 1, 0, -65529, 2, 0, -131065, 1, 4, -131065, 2, 4, -131065, 3, 4, -131066, 3, 4, -131066, 2, 4, -65529, 0, 0, -65528, 0, 0, -65528, 1, 0)
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
+
+[node name="Lift" parent="." instance=ExtResource("6_ft0g4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21005, -0.863815, -11.5075)
+height = 6
+
+[node name="Lever3" parent="Lift" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425916, -0.096105, 0)
+
+[node name="Chest" parent="." instance=ExtResource("7_12jy0")]
+transform = Transform3D(-0.443337, 0, 0.896355, 0, 1, 0, -0.896355, 0, -0.443337, -2.93003, 3.03167, 5.29413)
+
+[node name="Chest2" parent="." instance=ExtResource("7_12jy0")]
+transform = Transform3D(0.999409, 0, 0.0343762, 0, 1, 0, -0.0343762, 0, 0.999409, 0.561123, -0.968331, -12.7137)
+
+[node name="Chest3" parent="." instance=ExtResource("7_12jy0")]
+transform = Transform3D(0.999409, 0, 0.0343762, 0, 1, 0, -0.0343762, 0, 0.999409, 3.86161, -0.968331, -12.7137)
+
+[editable path="Lift"]
