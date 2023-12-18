@@ -248,7 +248,7 @@ bones/2/parent = 1
 bones/2/rest = Transform3D(1, 9.09495e-13, -9.53743e-07, 9.18745e-07, 0.268413, 0.963304, 2.55998e-07, -0.963304, 0.268413, 5.68434e-14, 0.628231, -0.906392)
 bones/2/enabled = true
 bones/2/position = Vector3(5.68434e-14, 0.628231, -0.906392)
-bones/2/rotation = Quaternion(-0.604809, -3.79767e-07, 2.88416e-07, 0.796371)
+bones/2/rotation = Quaternion(0.702659, -3.39307e-07, -3.35078e-07, 0.711526)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="Chest_Bottom" type="MeshInstance3D" parent="Chest_Armature/Skeleton3D"]
