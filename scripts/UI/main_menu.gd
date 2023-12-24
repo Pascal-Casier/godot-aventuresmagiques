@@ -12,7 +12,18 @@ class_name MainMenu
 
 func _ready():
 	handle_connectin_signals()
-
+	
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		if visible:
+			hide()
+			get_tree().paused = false
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			show()
+			get_tree().paused = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 func on_start_pressed() -> void:
 	get_tree().change_scene_to_packed(start_level)
 
