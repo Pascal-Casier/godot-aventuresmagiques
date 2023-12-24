@@ -9,6 +9,7 @@ var acceleration := 10.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Global.on_pause_mode.connect(pausing)
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -23,10 +24,5 @@ func _physics_process(delta: float) -> void:
 	$h/v.rotation_degrees.x = lerp($h/v.rotation_degrees.x, camrot_v, acceleration * delta)
 	
 	
-	#
-	#$h.rotate_y(camrot_h)
-	#$h/v.rotate_x(-camrot_v)
-	#$h/v.rotation.x = clamp($h/v.rotation.x, deg_to_rad(-30), deg_to_rad(30))
-#
-	#camrot_h = 0.0
-	#camrot_v = 0.0
+func pausing(on):
+	set_physics_process(!on)
