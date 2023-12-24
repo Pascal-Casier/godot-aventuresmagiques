@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://c76jbis073lkc"]
+[gd_scene load_steps=15 format=3 uid="uid://c76jbis073lkc"]
 
+[ext_resource type="PackedScene" uid="uid://cc33ysgujnadg" path="res://scenes/UI/ui.tscn" id="1_mk8j8"]
 [ext_resource type="MeshLibrary" uid="uid://rdhq5wj52y0b" path="res://meshlibs/floorsMeshlib.tres" id="1_on268"]
 [ext_resource type="PackedScene" uid="uid://ctk8p4yd8qcek" path="res://scenes/characters/player.tscn" id="2_8yq1o"]
 [ext_resource type="PackedScene" uid="uid://1n4p4clqluci" path="res://scenes/Decoration/water_plane.tscn" id="3_8yp8c"]
@@ -7,6 +8,9 @@
 [ext_resource type="MeshLibrary" uid="uid://5o4cu0yxnitt" path="res://meshlibs/TilesGrassAndDirtMeshlib.tres" id="5_bwxts"]
 [ext_resource type="PackedScene" uid="uid://d2u0uvf4kn6ug" path="res://scenes/mechanics/lift.tscn" id="6_ft0g4"]
 [ext_resource type="PackedScene" uid="uid://ct42c476pl1wp" path="res://scenes/mechanics/chest.tscn" id="7_12jy0"]
+[ext_resource type="PackedScene" uid="uid://idl2fl0tper3" path="res://scenes/mechanics/chest_rare.tscn" id="8_nyp8s"]
+[ext_resource type="PackedScene" uid="uid://cy85ddep23l3b" path="res://scenes/mechanics/coin.tscn" id="9_uqgt0"]
+[ext_resource type="PackedScene" uid="uid://y1pmgeefe2qu" path="res://scenes/mechanics/platform_fading.tscn" id="11_pn475"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rtknh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,6 +26,8 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Main" type="Node3D"]
+
+[node name="UI" parent="." instance=ExtResource("1_mk8j8")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 9.11461, 0)
@@ -39,7 +45,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_8yq1o")]
+[node name="Player" parent="." instance=ExtResource("2_8yq1o")]
 
 [node name="WaterPlane" parent="." instance=ExtResource("3_8yp8c")]
 transform = Transform3D(46.9424, 0, 0, 0, 17.54, 0, 0, 0, 36.9264, 0, -2.03783, 0)
@@ -70,10 +76,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425916, -0.096105, 0)
 [node name="Chest" parent="." instance=ExtResource("7_12jy0")]
 transform = Transform3D(-0.443337, 0, 0.896355, 0, 1, 0, -0.896355, 0, -0.443337, -2.93003, 3.03167, 5.29413)
 
-[node name="Chest2" parent="." instance=ExtResource("7_12jy0")]
-transform = Transform3D(0.999409, 0, 0.0343762, 0, 1, 0, -0.0343762, 0, 0.999409, 0.561123, -0.968331, -12.7137)
-
 [node name="Chest3" parent="." instance=ExtResource("7_12jy0")]
 transform = Transform3D(0.999409, 0, 0.0343762, 0, 1, 0, -0.0343762, 0, 0.999409, 3.86161, -0.968331, -12.7137)
+
+[node name="chest_rare" parent="." instance=ExtResource("8_nyp8s")]
+transform = Transform3D(0.958616, 0, 0.284701, 0, 1, 0, -0.284701, 0, 0.958616, -0.954497, -0.940339, -12.3429)
+
+[node name="coin" parent="." instance=ExtResource("9_uqgt0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.16249, -1.01339, -6.51916)
+
+[node name="coin2" parent="." instance=ExtResource("9_uqgt0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.07922, -1.01339, -8.3313)
+
+[node name="coin3" parent="." instance=ExtResource("9_uqgt0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25682, -1.01339, -8.93257)
+
+[node name="coin4" parent="." instance=ExtResource("9_uqgt0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.01695, -1.01339, -6.86426)
+
+[node name="Platform_fading" parent="." instance=ExtResource("11_pn475")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67832, 2.16497, -2.26924)
 
 [editable path="Lift"]

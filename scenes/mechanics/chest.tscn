@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/mechanics/chest.gd" id="1_bxqnw"]
 [ext_resource type="PackedScene" uid="uid://c7jr78q18x4wv" path="res://scripts/interaction/Interactable.tscn" id="2_36k7m"]
 [ext_resource type="Material" uid="uid://chbcblnlqln8x" path="res://scenes/shaders/outline.tres" id="2_54uek"]
-[ext_resource type="AudioStream" uid="uid://uwrifaubyxre" path="res://assets/sounds/sfx/chest_opening2.mp3" id="4_dom1s"]
+[ext_resource type="AudioStream" uid="uid://cdkgn8xvbeys8" path="res://assets/sounds/sfx/OldDoorOpenAndClose.wav" id="4_2vxwb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ae6b"]
 resource_name = "DarkMetal"
@@ -204,9 +204,9 @@ tracks/3/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("4_dom1s")
+"stream": ExtResource("4_2vxwb")
 }],
-"times": PackedFloat32Array(0.2)
+"times": PackedFloat32Array(0)
 }
 tracks/3/use_blend = true
 

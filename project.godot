@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
+Global="*res://scripts/autoload/Global.gd"
 
 [dialogic]
 
@@ -41,6 +42,10 @@ window/size/mode=3
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+
+[filesystem]
+
+import/fbx/enabled=false
 
 [input]
 
@@ -113,3 +118,7 @@ toggle_sprint={
 [physics]
 
 3d/physics_engine="JoltPhysics3D"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

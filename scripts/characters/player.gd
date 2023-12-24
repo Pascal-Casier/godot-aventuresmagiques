@@ -20,6 +20,16 @@ var last_floor := true
 var sprint_toggle := true
 var sprinting := false
 
+@onready var footstep_audio_stream_player = $Sounds/FootstepAudioStreamPlayer
+@onready var step_timer = $Sounds/StepTimer
+
+@onready var shoot_timer = $Shoot_Timer
+var can_shoot := true
+@onready var muzzle = $Mage/muzzle
+var bullet = load("res://scenes/mechanics/bullet_lighning.tscn")
+var instance
+
+
 func _input(event):
 	if sprint_toggle:
 		if event.is_action_pressed("sprint"):
@@ -83,8 +93,12 @@ func _physics_process(delta):
 	$AnimationTree["parameters/strafe/blend_position"] = Vector2(-strafe.x, strafe.z)
 	velocity = direction
 	
+			
 	if Input.is_action_just_pressed("fire"):
-		$AnimationTree["parameters/throw/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+		if can_shoot:
+			fire()
+			$ShootAudioStreamPlayer.play()
+			$AnimationTree["parameters/throw/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	
 	if is_on_floor():
 		$AnimationTree["parameters/jump_transition/transition_request"] = "not_jumping"
@@ -100,24 +114,20 @@ func _physics_process(delta):
 		$AnimationTree["parameters/JumpStateMachine/playback"].travel("Jump_Idle")
 		$AnimationTree["parameters/jump_transition/transition_request"] = "jumping"
 	last_floor = is_on_floor()
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity.y -= gravity * delta
-#
-	## Handle jump.
-	#if Input.is_action_just_pressed("jump") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var input_dir = Input.get_vector("left", "right", "forward", "backward")
-	#var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	#direction = direction.rotated(Vector3.UP, h_rot).normalized()
-	#if direction:
-		#velocity.x = direction.x * SPEED
-		#velocity.z = direction.z * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-		#velocity.z = move_toward(velocity.z, 0, SPEED)
-#
-	#move_and_slide()
+	
+	
+func fire():
+	can_shoot = false
+	instance = bullet.instantiate()
+	instance.position = muzzle.global_position
+	instance.transform.basis = muzzle.global_transform.basis
+	get_parent().add_child(instance)
+	shoot_timer.start()
+
+func _on_shoot_timer_timeout():
+	can_shoot = true
+
+func damage_received():
+	if Global.health >= 0:
+		Global.health -= 5
+		Global.emit_health_update()
