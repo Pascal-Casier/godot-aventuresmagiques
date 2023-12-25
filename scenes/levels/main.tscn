@@ -16,6 +16,16 @@
 [ext_resource type="Shader" uid="uid://b6m35bkqytl76" path="res://scenes/shaders/WaterShader2.tres" id="15_0benm"]
 [ext_resource type="PackedScene" uid="uid://dytj0oqhc1k16" path="res://scenes/mechanics/crate.tscn" id="15_mla10"]
 
+[sub_resource type="QuadMesh" id="QuadMesh_kgjd5"]
+size = Vector2(300, 300)
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bg6r"]
+render_priority = 0
+shader = ExtResource("15_0benm")
+shader_parameter/ColorParameter = Color(0, 0.266667, 0.533333, 1)
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rtknh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -29,19 +39,14 @@ sky = SubResource("Sky_eqkrd")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="QuadMesh" id="QuadMesh_kgjd5"]
-size = Vector2(300, 300)
-subdivide_width = 50
-subdivide_depth = 50
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bg6r"]
-render_priority = 0
-shader = ExtResource("15_0benm")
-shader_parameter/ColorParameter = Color(0, 0.266667, 0.533333, 1)
-
 [node name="Main" type="Node3D"]
 
 [node name="UI" parent="." instance=ExtResource("1_mk8j8")]
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1.30729, 0)
+mesh = SubResource("QuadMesh_kgjd5")
+surface_material_override/0 = SubResource("ShaderMaterial_0bg6r")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 9.11461, 0)
@@ -109,8 +114,3 @@ letter_audio = ExtResource("14_iwosk")
 
 [node name="crate" parent="." instance=ExtResource("15_mla10")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
-
-[node name="Water" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1.30729, 0)
-mesh = SubResource("QuadMesh_kgjd5")
-surface_material_override/0 = SubResource("ShaderMaterial_0bg6r")
