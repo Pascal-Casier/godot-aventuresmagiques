@@ -27,7 +27,7 @@ layout/styles={
 "Default": {},
 "style1": {
 "export_overrides": {
-"text_alignment": "1",
+"box_modulate": "Color(0.00784314, 0.0313726, 0.384314, 0.843137)",
 "text_size": "19.0"
 },
 "inherits": ""
