@@ -1,19 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://c76jbis073lkc"]
+[gd_scene load_steps=21 format=3 uid="uid://c76jbis073lkc"]
 
 [ext_resource type="PackedScene" uid="uid://cc33ysgujnadg" path="res://scenes/UI/ui.tscn" id="1_mk8j8"]
 [ext_resource type="MeshLibrary" uid="uid://rdhq5wj52y0b" path="res://meshlibs/floorsMeshlib.tres" id="1_on268"]
 [ext_resource type="PackedScene" uid="uid://ctk8p4yd8qcek" path="res://scenes/characters/player.tscn" id="2_8yq1o"]
-[ext_resource type="PackedScene" uid="uid://1n4p4clqluci" path="res://scenes/Decoration/water_plane.tscn" id="3_8yp8c"]
 [ext_resource type="MeshLibrary" uid="uid://c2kpxx52kae10" path="res://meshlibs/Walls_stairsMeshlib.tres" id="4_1mcpy"]
 [ext_resource type="MeshLibrary" uid="uid://5o4cu0yxnitt" path="res://meshlibs/TilesGrassAndDirtMeshlib.tres" id="5_bwxts"]
-[ext_resource type="PackedScene" uid="uid://d2u0uvf4kn6ug" path="res://scenes/mechanics/lift.tscn" id="6_ft0g4"]
 [ext_resource type="PackedScene" uid="uid://ct42c476pl1wp" path="res://scenes/mechanics/chest.tscn" id="7_12jy0"]
 [ext_resource type="PackedScene" uid="uid://idl2fl0tper3" path="res://scenes/mechanics/chest_rare.tscn" id="8_nyp8s"]
 [ext_resource type="PackedScene" uid="uid://cy85ddep23l3b" path="res://scenes/mechanics/coin.tscn" id="9_uqgt0"]
-[ext_resource type="PackedScene" uid="uid://y1pmgeefe2qu" path="res://scenes/mechanics/platform_fading.tscn" id="11_pn475"]
 [ext_resource type="PackedScene" uid="uid://bcow1mhamm7ga" path="res://scenes/mechanics/key.tscn" id="12_8rfkq"]
 [ext_resource type="PackedScene" uid="uid://bjoqsbw3w2aaf" path="res://scenes/characters/rogue_character.tscn" id="13_lmr6h"]
+[ext_resource type="PackedScene" uid="uid://furp4le04nnj" path="res://scenes/mechanics/cube_alphabet.tscn" id="13_tvu5a"]
 [ext_resource type="PackedScene" uid="uid://bnww4mack7gpl" path="res://scenes/mechanics/heart.tscn" id="14_1gs3c"]
+[ext_resource type="AudioStream" uid="uid://dwggnar25y1ej" path="res://assets/sounds/sfx/Footstep.mp3" id="14_iwosk"]
+[ext_resource type="Shader" uid="uid://b6m35bkqytl76" path="res://scenes/shaders/WaterShader2.tres" id="15_0benm"]
+[ext_resource type="PackedScene" uid="uid://dytj0oqhc1k16" path="res://scenes/mechanics/crate.tscn" id="15_mla10"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rtknh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -27,6 +28,16 @@ background_mode = 2
 sky = SubResource("Sky_eqkrd")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_kgjd5"]
+size = Vector2(300, 300)
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bg6r"]
+render_priority = 0
+shader = ExtResource("15_0benm")
+shader_parameter/ColorParameter = Color(0, 0.266667, 0.533333, 1)
 
 [node name="Main" type="Node3D"]
 
@@ -50,9 +61,6 @@ metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_8yq1o")]
 
-[node name="WaterPlane" parent="." instance=ExtResource("3_8yp8c")]
-transform = Transform3D(121.906, 0, 0, 0, 17.54, 0, 0, 0, 87.0695, 0, -2.03783, 0)
-
 [node name="GridMap2" type="GridMap" parent="."]
 mesh_library = ExtResource("4_1mcpy")
 data = {
@@ -69,33 +77,14 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
-[node name="Lift" parent="." instance=ExtResource("6_ft0g4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21005, -0.863815, -11.5075)
-height = 6
-
-[node name="Lever3" parent="Lift" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425916, -0.096105, 0)
-
 [node name="Chest3" parent="." instance=ExtResource("7_12jy0")]
 transform = Transform3D(0.999409, 0, 0.0343762, 0, 1, 0, -0.0343762, 0, 0.999409, 3.86161, -0.968331, -12.7137)
 
 [node name="chest_rare" parent="." instance=ExtResource("8_nyp8s")]
 transform = Transform3D(0.958616, 0, 0.284701, 0, 1, 0, -0.284701, 0, 0.958616, -0.954497, -0.940339, -12.3429)
 
-[node name="coin" parent="." instance=ExtResource("9_uqgt0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.16249, -1.01339, -6.51916)
-
-[node name="coin2" parent="." instance=ExtResource("9_uqgt0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.07922, -1.01339, -8.3313)
-
-[node name="coin3" parent="." instance=ExtResource("9_uqgt0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25682, -1.01339, -8.93257)
-
 [node name="coin4" parent="." instance=ExtResource("9_uqgt0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.01695, -1.01339, -6.86426)
-
-[node name="Platform_fading" parent="." instance=ExtResource("11_pn475")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.848214, 2.16497, 4.20395)
 
 [node name="Key" parent="." instance=ExtResource("12_8rfkq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.49185, -0.0115246, 0)
@@ -105,18 +94,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.49185, -0.0115246, 0)
 [node name="RogueCharacter" parent="NPC" instance=ExtResource("13_lmr6h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.90993, -0.944863, -9.20931)
 
-[node name="Heart" parent="." instance=ExtResource("14_1gs3c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.833652, -0.387498, -9.79005)
-
-[node name="Heart2" parent="." instance=ExtResource("14_1gs3c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0157599, -0.387498, -6.9199)
-value = 26
-
-[node name="Heart3" parent="." instance=ExtResource("14_1gs3c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.63945, -0.387498, -7.514)
-value = 12
-
 [node name="Heart4" parent="." instance=ExtResource("14_1gs3c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44823, -0.387498, -4.43196)
 
-[editable path="Lift"]
+[node name="Cube_Alphabet" parent="." instance=ExtResource("13_tvu5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.75878)
+letter = "C"
+
+[node name="Cube_Alphabet2" parent="." instance=ExtResource("13_tvu5a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.98846)
+letter = "Y"
+phonetic = "[I grec]"
+letter_audio = ExtResource("14_iwosk")
+
+[node name="crate" parent="." instance=ExtResource("15_mla10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1.30729, 0)
+mesh = SubResource("QuadMesh_kgjd5")
+surface_material_override/0 = SubResource("ShaderMaterial_0bg6r")

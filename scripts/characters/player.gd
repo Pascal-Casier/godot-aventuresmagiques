@@ -20,6 +20,8 @@ var last_floor := true
 var sprint_toggle := true
 var sprinting := false
 
+var push_force := 25.0
+var push_factor := 0.0
 
 @onready var shoot_timer = $Shoot_Timer
 var can_shoot := true
@@ -77,6 +79,15 @@ func _physics_process(delta):
 	velocity = lerp(velocity, direction * movement_speed, delta * acceleration)
 	velocity = velocity + Vector3.UP * vertical_velocity
 	move_and_slide()
+	
+	push_factor = velocity.length()
+	push_factor = clamp(push_factor, 1.5, 10)
+	##handle interaction with rigidbodies
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().apply_central_impulse(-c.get_normal() * push_force * push_factor)
+	
 	
 	if !is_on_floor():
 		vertical_velocity -= gravity * delta

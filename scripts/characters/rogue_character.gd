@@ -4,11 +4,13 @@ extends Node3D
 @onready var label = $Control/Label
 
 
+@warning_ignore("unused_parameter")
 func _on_interactable_focused(interactor):
 	animation_player.play("Cheer")
 	label.show()
 	
 
+@warning_ignore("unused_parameter")
 func _on_interactable_interacted(interactor):
 	if Dialogic.current_timeline != null:
 		return
@@ -20,6 +22,7 @@ func _on_interactable_interacted(interactor):
 	get_viewport().set_input_as_handled()
 	
 
+@warning_ignore("unused_parameter")
 func _on_interactable_unfocused(interactor):
 	animation_player.play("Idle")
 	label.hide()

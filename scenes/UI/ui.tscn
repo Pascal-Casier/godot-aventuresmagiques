@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cc33ysgujnadg"]
+[gd_scene load_steps=14 format=3 uid="uid://cc33ysgujnadg"]
 
 [ext_resource type="Script" path="res://scripts/UI/ui.gd" id="1_garol"]
 [ext_resource type="Texture2D" uid="uid://bye1jinjagy7e" path="res://assets/images/ui/HeartFull.png" id="2_xdo5d"]
@@ -35,7 +35,11 @@ texture = SubResource("CompressedTexture2D_t2dpi")
 texture_margin_left = 4.0
 region_rect = Rect2(429, 56, 23, 14)
 
+[sub_resource type="SystemFont" id="SystemFont_ckkbv"]
+font_names = PackedStringArray("Impact")
+
 [node name="UI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,3 +143,55 @@ stretch_mode = 4
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "00"
+
+[node name="Pause_menu" type="MarginContainer" parent="."]
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 145
+theme_override_constants/margin_top = 145
+theme_override_constants/margin_right = 145
+theme_override_constants/margin_bottom = 145
+
+[node name="Panel" type="Panel" parent="Pause_menu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause_menu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="btnresume" type="Button" parent="Pause_menu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ckkbv")
+theme_override_font_sizes/font_size = 32
+text = "continuer"
+
+[node name="btnOptions" type="Button" parent="Pause_menu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ckkbv")
+theme_override_font_sizes/font_size = 32
+text = "options"
+
+[node name="btnMenuPrincipal" type="Button" parent="Pause_menu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ckkbv")
+theme_override_font_sizes/font_size = 32
+text = "menu principal"
+
+[connection signal="pressed" from="Pause_menu/Panel/VBoxContainer/btnOptions" to="." method="_on_btn_options_pressed"]
