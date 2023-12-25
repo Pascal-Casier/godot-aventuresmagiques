@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 
 var movement_speed := 0.0
-var run_speed := 100
+var run_speed := 85
 var walk_speed := 60
 var acceleration := 6
 var jump_magnitude := 12.0
@@ -20,8 +20,6 @@ var last_floor := true
 var sprint_toggle := true
 var sprinting := false
 
-@onready var footstep_audio_stream_player = $Sounds/FootstepAudioStreamPlayer
-@onready var step_timer = $Sounds/StepTimer
 
 @onready var shoot_timer = $Shoot_Timer
 var can_shoot := true
@@ -29,6 +27,8 @@ var can_shoot := true
 var bullet = load("res://scenes/mechanics/bullet_lighning.tscn")
 var instance
 
+func _ready():
+	Global.on_pause_mode.connect(pausing)
 
 func _input(event):
 	if sprint_toggle:
@@ -131,3 +131,7 @@ func damage_received():
 	if Global.health >= 0:
 		Global.health -= 5
 		Global.emit_health_update()
+
+func pausing(on):
+	set_physics_process(!on)
+	
