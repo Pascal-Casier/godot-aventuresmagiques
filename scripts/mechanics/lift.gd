@@ -1,6 +1,7 @@
 extends Node3D
 
-@export var height : int = 2
+#@export var height : int = 2
+@export var position_final : Vector3i
 @onready var sprite_3d = $Sprite3D
 @onready var animation_player = $Lever3/AnimationPlayer
 @onready var lift_stream_player = $liftStreamPlayer as AudioStreamPlayer
@@ -12,7 +13,8 @@ var up := false
 
 func _ready():
 	start_position = $StaticBody3D.position
-	end_position  = Vector3(0, height, 0)
+	end_position = position_final
+	#end_position  = Vector3(0, height, 0)
 	
 func elevator_on():
 	var my_tween = create_tween()

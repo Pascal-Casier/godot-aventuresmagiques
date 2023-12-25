@@ -1,5 +1,9 @@
 extends CharacterBody3D
 
+@onready var interaction_raycast = $Mage/interactionRaycast
+@onready var hand = $Mage/hand
+@onready var throw_audio_stream_player = $ThrowAudioStreamPlayer
+
 
 var movement_speed := 0.0
 var run_speed := 85
@@ -23,6 +27,9 @@ var sprinting := false
 var push_force := 25.0
 var push_factor := 0.0
 
+var picked_object
+var pull_power := 5
+
 @onready var shoot_timer = $Shoot_Timer
 var can_shoot := true
 @onready var muzzle = $Mage/muzzle
@@ -42,6 +49,16 @@ func _input(event):
 	if Input.is_action_just_pressed("toggle_sprint"):
 		sprint_toggle = false if sprint_toggle else true
 
+	if event.is_action_pressed("interact"):
+		if picked_object == null:
+			print("NO OBJ")
+			pick_object()
+		elif picked_object != null:
+			release_object()
+	if event.is_action_pressed("BMM"):
+		if picked_object !=null:
+			throw_object()
+			release_object()
 
 func _physics_process(delta):
 	velocity = Vector3.ZERO
@@ -80,14 +97,15 @@ func _physics_process(delta):
 	velocity = velocity + Vector3.UP * vertical_velocity
 	move_and_slide()
 	
+	##handle interaction with rigidbodies#################
 	push_factor = velocity.length()
 	push_factor = clamp(push_factor, 1.5, 10)
-	##handle interaction with rigidbodies
+	
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
 			c.get_collider().apply_central_impulse(-c.get_normal() * push_force * push_factor)
-	
+	###########################
 	
 	if !is_on_floor():
 		vertical_velocity -= gravity * delta
@@ -104,13 +122,13 @@ func _physics_process(delta):
 	$AnimationTree["parameters/strafe/blend_position"] = Vector2(-strafe.x, strafe.z)
 	velocity = direction
 	
-			
+	#SHOOTING		
 	if Input.is_action_just_pressed("fire"):
 		if can_shoot:
 			fire()
 			$ShootAudioStreamPlayer.play()
 			$AnimationTree["parameters/throw/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
-	
+	#JUMPING
 	if is_on_floor():
 		$AnimationTree["parameters/jump_transition/transition_request"] = "not_jumping"
 		if Input.is_action_just_pressed("jump"):
@@ -126,7 +144,15 @@ func _physics_process(delta):
 		$AnimationTree["parameters/jump_transition/transition_request"] = "jumping"
 	last_floor = is_on_floor()
 	
+	####### HANDLING PICKED OBJECT ################
 	
+	if picked_object != null:
+		picked_object.add_highlight()
+		var a = picked_object.global_transform.origin
+		var b = hand.global_transform.origin
+		picked_object.set_linear_velocity((b-a) * pull_power)
+	#################################################
+		
 func fire():
 	can_shoot = false
 	instance = bullet.instantiate()
@@ -143,6 +169,22 @@ func damage_received():
 		Global.health -= 5
 		Global.emit_health_update()
 
+func pick_object() -> void:
+	var collider = interaction_raycast.get_collider()
+	if collider != null and collider is RigidBody3D:
+		picked_object = collider
+
+func release_object() -> void:
+	if picked_object != null:
+		picked_object.remove_highlight()
+		picked_object = null
+	
+func throw_object() -> void:
+	var knockback = picked_object.position - position
+	picked_object.apply_central_impulse(knockback * 200)
+	release_object()
+	throw_audio_stream_player.play()
+	
 func pausing(on):
 	set_physics_process(!on)
 	

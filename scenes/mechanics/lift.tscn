@@ -189,6 +189,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.61164, 0.694848, 2.03857)
 shape = SubResource("BoxShape3D_u1ynu")
 
 [node name="Lever3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0683846, 0)
 
 [node name="LeverArmature" type="Node3D" parent="Lever3"]
 

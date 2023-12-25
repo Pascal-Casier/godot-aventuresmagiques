@@ -1,4 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dytj0oqhc1k16"]
+[gd_scene load_steps=10 format=3 uid="uid://dytj0oqhc1k16"]
+
+[ext_resource type="Script" path="res://scripts/mechanics/crate.gd" id="1_ndus6"]
+[ext_resource type="Script" path="res://scripts/interaction/Interactable.gd" id="2_bsle0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvvu7"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.992157, 0.984314, 0.0705882, 1)
+grow = true
+grow_amount = 0.015
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i73fp"]
 resource_name = "BrownDark"
@@ -69,10 +79,15 @@ shadow_mesh = SubResource("ArrayMesh_nf7ea")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l7pwe"]
 
-[node name="crate" type="RigidBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_uerr4"]
+
+[node name="crate" type="RigidBody3D" groups=["Pickeable"]]
 collision_layer = 4
 collision_mask = 7
 mass = 50.0
+gravity_scale = 3.0
+script = ExtResource("1_ndus6")
+highlight_material = SubResource("StandardMaterial3D_bvvu7")
 
 [node name="crate" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
@@ -81,3 +96,14 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_l7pwe")
+
+[node name="Interactable" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_bsle0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+shape = SubResource("BoxShape3D_uerr4")
+
+[connection signal="focused" from="Interactable" to="." method="_on_interactable_focused"]
+[connection signal="unfocused" from="Interactable" to="." method="_on_interactable_unfocused"]
