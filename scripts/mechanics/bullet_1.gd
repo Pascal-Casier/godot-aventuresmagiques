@@ -1,19 +1,10 @@
 extends Node3D
 
 const SPEED := 40.0
-
-@onready var mesh_instance_3d = $MeshInstance3D
-@onready var ray_cast_3d = $RayCast3D
-
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-
-
 const ROTATION_SPEED : = 200.0
 
+@onready var mesh_instance_3d = $MeshInstance3D
+@onready var ray_cast_3d = $MeshInstance3D/RayCast3D
 @onready var gpu_particles_3d = $GPUParticles3D
 
 @onready var sparks = $explosion/sparks
