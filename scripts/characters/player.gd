@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var interaction_raycast = $Mage/interactionRaycast
 @onready var hand = $Mage/hand
 @onready var throw_audio_stream_player = $ThrowAudioStreamPlayer
+@onready var hurt_audio_stream_player = $HurtAudioStreamPlayer
 
 
 var movement_speed := 0.0
@@ -166,7 +167,8 @@ func _on_shoot_timer_timeout():
 
 func damage_received():
 	if Global.health >= 0:
-		Global.health -= 5
+		hurt_audio_stream_player.play()
+		Global.health -= 10
 		Global.emit_health_update()
 
 func pick_object() -> void:
