@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Questions" load_steps=3 format=3 uid="uid://b44duk4wfr4qs"]
+
+[ext_resource type="AudioStream" uid="uid://ctcrto5iq1cjl" path="res://assets/sounds/sfx/confirm.ogg" id="1_b5ygj"]
+[ext_resource type="Script" path="res://scenes/UI/Quizz/questions/Quizz_question.gd" id="2_h5x7o"]
+
+[resource]
+script = ExtResource("2_h5x7o")
+question = "Tu ____"
+choiceA = "mange"
+choiceB = "manges"
+choiceC = "mang"
+choiceD = "manger"
+correct = "b"
+audiostream = ExtResource("1_b5ygj")

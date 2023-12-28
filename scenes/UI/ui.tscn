@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bduu15f8c0nfn" path="res://assets/images/ui/key.png" id="4_nku4w"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6ekcw"]
-load_path = "res://.godot/imported/ui_big_pieces.png-243add315c716404838737021fbcf4bc.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lwvf0"]
 texture = SubResource("CompressedTexture2D_6ekcw")
@@ -18,7 +17,6 @@ expand_margin_bottom = 10.0
 region_rect = Rect2(259, 63, 74, 24)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o2681"]
-load_path = "res://.godot/imported/ui_big_pieces.png-243add315c716404838737021fbcf4bc.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kkcix"]
 texture = SubResource("CompressedTexture2D_o2681")
@@ -28,7 +26,6 @@ region_rect = Rect2(399, 40, 22, 14)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r88bd"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t2dpi"]
-load_path = "res://.godot/imported/ui_big_pieces.png-243add315c716404838737021fbcf4bc.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_avu2j"]
 texture = SubResource("CompressedTexture2D_t2dpi")
